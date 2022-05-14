@@ -1,7 +1,8 @@
-import React, { useContext } from 'react'
+import React, { useContext,useState } from 'react'
 import { deleteNote, putNote } from '../../actions/noteActions/noteActions';
 import { Store } from '../../state/StoreProvider';
 import TagList from '../tag/TagList';
+import { postTag } from '../../actions/tagActions/tagActions';
 
 const Note = ({ note }) => {
 
@@ -36,6 +37,34 @@ const Note = ({ note }) => {
     }
     dispatch(action)
   }
+
+  const [title, setTitle] = useState('')
+
+  const addTag = async (e)=>{
+    e.preventDefault()
+    // console.log("note Note")
+    // console.log(note.id)
+    // console.log(title)
+    if(title){
+      const category = {
+        tag:title,
+        noteId:note.id
+      }
+      console.log(category)
+      const response = await postTag(category)
+      const action = {
+        type: 'create-Tag',
+        payload: response
+      }
+      dispatch(action)
+      setTitle('')
+    }
+  }
+
+  const addingTitle = (e)=>{
+    setTitle(e.target.value)
+  }
+  
   return (
     <div>
 
@@ -46,15 +75,14 @@ const Note = ({ note }) => {
           <input onChange={onCheckbox} type="checkbox" checked={note.done} />
         </div>
         <div className='col-4'>
-          <input className="col-6" type="text" name="Tag" placeholder="Tag" />
-          <button className="col-6 btn btn-secondary mt-1" onClick={editNote}>Add Tag</button>
+          <input className="col-6" onChange={addingTitle} type="text" name="Tag" placeholder="Tag" />
+          <button className="col-6 btn btn-secondary mt-1" onClick={addTag}>Add Tag</button>
           <div className='col-4'><TagList note={note.tags  }></TagList></div>
         </div>
 
           <button className=" btn btn-warning mt-2" onClick={() => onDeleteNote(note.id)}>delete note</button>
           <button className=" btn btn-secondary mt-1" onClick={editNote}>edit note</button>
-          {console.log("note Note")}
-          {console.log(note)}
+
           
 
       </div>

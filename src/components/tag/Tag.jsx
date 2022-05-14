@@ -4,8 +4,7 @@ const Tag = (tag) => {
     return (
 
         <div>
-            {console.log("notes Tag")}
-            {console.log(tag.tag)}
+
             {tag.tag}</div>
     )
 }
