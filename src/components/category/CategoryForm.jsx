@@ -29,11 +29,15 @@ const CategoryForm = () => {
   }
 
   return (
-    <form>
-      <label htmlFor="category"></label>
-      <input onChange={addingTitle} type="text" name="category" value={title}/>
-      <button onClick={addCategory}>Add category</button>
-    </form>
+    <div className='container'>
+      <form>
+        <div className="input-group mb-3">
+          <label htmlFor="category"></label>
+          <input className="form-control mt-2 me-2" onChange={addingTitle} type="text" name="category" value={title} />
+          <button className="btn btn-success mt-2 me-3" onClick={addCategory}>Add category</button>
+        </div>
+      </form>
+    </div>
   )
 }
 

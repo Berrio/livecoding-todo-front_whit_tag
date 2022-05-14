@@ -37,10 +37,13 @@ const Note = ({note}) => {
   }
   return (
     <div>
-      <h1 style={note.done?{'textDecoration': 'line-through'}:{}}>{note.message}</h1>
-      <input onChange={onCheckbox} type="checkbox" checked={note.done} />
-      <button onClick={() => onDeleteNote(note.id)}>delete note</button>
-      <button onClick={editNote}>edit note</button>
+
+      <div className="card ">
+        <h3 style={note.done ? { 'textDecoration': 'line-through' } : {}}>{note.message}</h3>
+        <input onChange={onCheckbox} type="checkbox" checked={note.done} />
+        <button className=" btn btn-warning mt-2" onClick={() => onDeleteNote(note.id)}>delete note</button>
+        <button className=" btn btn-secondary mt-1" onClick={editNote}>edit note</button>
+      </div>
     </div>
   )
 }

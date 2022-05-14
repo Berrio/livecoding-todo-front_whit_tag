@@ -19,10 +19,12 @@ const CategoryList = () => {
   }, [])
 
   return (
-    <div>
-      <h1>Hello from category list</h1>
-      <CategoryForm />
-      {state.categoryList.map(category => <Category key={category.id}category={category} />)}
+    <div className='container'>
+      <div className="card">
+
+        <CategoryForm />
+        {state.categoryList.map(category => <Category key={category.id} category={category} />)}
+      </div>
     </div>
   )
 }
