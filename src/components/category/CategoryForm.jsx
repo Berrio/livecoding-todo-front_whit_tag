@@ -2,9 +2,10 @@ import React, { useContext, useState } from 'react'
 import { postCategory } from '../../actions/categoryActions/categoryActions'
 import { Store } from '../../state/StoreProvider'
 
-const CategoryForm = () => {
 
-  const [title, setTitle] = useState('')
+const CategoryForm = ({title,setTitle}) => {
+
+  
 
   const {dispatch} = useContext(Store)
 
@@ -33,7 +34,8 @@ const CategoryForm = () => {
       <form>
         <div className="input-group mb-3">
           <label htmlFor="category"></label>
-          <input className="form-control mt-2 me-2" onChange={addingTitle} type="text" name="category" value={title} />
+          <input className="form-control mt-2 me-2" onChange={addingTitle 
+          }  type="text" name="category" value={title} />
           <button className="btn btn-success mt-2 me-3" onClick={addCategory}>Add category</button>
         </div>
       </form>

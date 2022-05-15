@@ -27,6 +27,7 @@ const Category = ({category: {id, title, notes}}) => {
           <h2 className="col-6" >{title}</h2>
 
           <button className="btn btn-danger mt-2 me-3 col-2.5" onClick={() => deleteCategory(id)}>Delete category</button>
+          
         </div>
         <NoteList id={id} notes={notes} />
       </div>

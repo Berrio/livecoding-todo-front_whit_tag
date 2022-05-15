@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect,useState } from 'react'
 import { getAllCategories } from '../../actions/categoryActions/categoryActions'
 import { Store } from '../../state/StoreProvider'
 import Category from './Category'
@@ -7,7 +7,7 @@ import CategoryForm from './CategoryForm'
 const CategoryList = () => {
 
   const {state, dispatch} = useContext(Store)
-
+  const [title, setTitle] = useState('')
   useEffect(()=>{
     getAllCategories().then(categories => {
       const action = {
@@ -18,11 +18,38 @@ const CategoryList = () => {
     })
   }, [])
 
+  let searched=[];
+
+  if(!title.length >=1){
+    searched=state.categoryList
+    // console.log("searched malo")
+    // console.log(searched)
+  }else {
+    
+    //  let searched=state.categoryList.map(cat => cat.notes.map(not => not.tags.filter(tag => console.log(tag.tag.includes(title))) ))
+    //  console.log("searched bueno")
+    //  console.log(searched)
+    // // let searched=""
+    // //  return searched
+
+    const prueba = () => {
+      const action = {
+        type: 'search-Tag',
+         payload: title
+      }
+      dispatch(action)
+    }
+    prueba()
+    console.log("impresion")
+  }
+
   return (
     <div className='container'>
       <div className="card">
 
-        <CategoryForm />
+      <input className="form-control mt-2 me-2"  type="text" name="category"  />
+
+        <CategoryForm title={title} setTitle={setTitle}/>
         {state.categoryList.map(category => <Category key={category.id} category={category} />)}
       </div>
     </div>

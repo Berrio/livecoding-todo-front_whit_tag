@@ -88,11 +88,30 @@ const reducer = (state, action) => {
       const noteWithTagAdded = { ...noteToAddTask, tags: [...noteToAddTask.tags, action.payload] }
 
       const newNoteList = CategoryToAddTask.notes.map(note => note.id === action.payload.noteId ? noteWithTagAdded : note)
-      const NewCategoryWithNotesWithcNewTag = {...CategoryToAddTask,notes: newNoteList}
-      const newCategoryList=state.categoryList.map(category => category.id===noteWithTagAdded.categoryId?NewCategoryWithNotesWithcNewTag:category)
+      const NewCategoryWithNotesWithcNewTag = { ...CategoryToAddTask, notes: newNoteList }
+      const newCategoryList = state.categoryList.map(category => category.id === noteWithTagAdded.categoryId ? NewCategoryWithNotesWithcNewTag : category)
 
-      const newstate= {...state,categoryList:newCategoryList}
+      const newstate = { ...state, categoryList: newCategoryList }
       return newstate
+
+    case 'search-Tag':
+      const s=state.categoryList.find(cat => cat.notes.find(not => not.tags.find(tag => tag.tag.includes(action.payload))) )
+      console.log("reducer" )
+      console.log(s)
+      // const CategoryToAddTask2 = state.categoryList.find(categ => categ.notes.find(not => not.id === action.payload.noteId))
+      // const noteToAddTask2 = CategoryToAddTask2.notes.find(tag => tag.id === action.payload.noteId)
+
+      // const noteWithTagAdded2 = { ...noteToAddTask2, tags: [...noteToAddTask2.tags, action.payload] }
+
+      // const newNoteList2 = CategoryToAddTask.notes.map(note => note.id === action.payload.noteId ? noteWithTagAdded : note)
+      // const NewCategoryWithNotesWithcNewTag2 = { ...CategoryToAddTask, notes: newNoteList }
+      // const newCategoryList2 = state.categoryList.map(category => category.id === noteWithTagAdded2.categoryId ? NewCategoryWithNotesWithcNewTag2 : category)
+
+      // const newstate2 = { ...state, categoryList: newCategoryList2 }
+      // console.log(action.payload)
+      // const estado={...state,categoryList:s}
+
+      return state
   }
 }
 

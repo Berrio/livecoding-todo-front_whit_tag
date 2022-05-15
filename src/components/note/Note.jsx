@@ -50,7 +50,7 @@ const Note = ({ note }) => {
         tag:title,
         noteId:note.id
       }
-      console.log(category)
+
       const response = await postTag(category)
       const action = {
         type: 'create-Tag',
@@ -82,8 +82,6 @@ const Note = ({ note }) => {
 
           <button className=" btn btn-warning mt-2" onClick={() => onDeleteNote(note.id)}>delete note</button>
           <button className=" btn btn-secondary mt-1" onClick={editNote}>edit note</button>
-
-          
 
       </div>
     </div>
