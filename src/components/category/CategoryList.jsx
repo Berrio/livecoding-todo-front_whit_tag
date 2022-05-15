@@ -8,6 +8,8 @@ const CategoryList = () => {
 
   const {state, dispatch} = useContext(Store)
   const [title, setTitle] = useState('')
+  const [filter, setfilter] = useState('')
+
   useEffect(()=>{
     getAllCategories().then(categories => {
       const action = {
@@ -32,25 +34,24 @@ const CategoryList = () => {
     // // let searched=""
     // //  return searched
 
-    const prueba = () => {
-      const action = {
-        type: 'search-Tag',
-         payload: title
-      }
-      dispatch(action)
-    }
-    prueba()
-    console.log("impresion")
+    // const prueba = () => {
+    //   const action = {
+    //     type: 'search-Tag',
+    //      payload: title
+    //   }
+    //   dispatch(action)
+    // }
+    // prueba()
+    // console.log("impresion")
   }
 
   return (
     <div className='container'>
       <div className="card">
-
-      <input className="form-control mt-2 me-2"  type="text" name="category"  />
-
+      
+      <input className="form-control mt-2 me-2"  type="text" name="category" value={filter} onChange={(e)=>setfilter(e.target.value) } />
         <CategoryForm title={title} setTitle={setTitle}/>
-        {state.categoryList.map(category => <Category key={category.id} category={category} />)}
+        {state.categoryList.filter(cat =>cat.title.includes(filter)).map(category => <Category key={category.id} category={category}  />)}
       </div>
     </div>
   )
